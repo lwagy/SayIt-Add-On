@@ -11,6 +11,7 @@ SayIt = None
 TTS = pyttsx.init()
 
 
+
 @cbpi.initalizer(order=9000)
 def init(cbpi):
     print("Initializing the SayIt plugin by Lawrence Wagy")
@@ -22,7 +23,19 @@ def init(cbpi):
     if SayIt_Voice is None or not SayIt_Voice:
         cbpi.notify("SayIt Plugin Error", "Check the SayIt voice parameter", type="Warning", timeout=None)
     else:
+        voices = TTS.getProperty('voices')
+        for voice in voices:
+            if SayIt_Voice == voice.name:
+                TTS.setProperty('voice', voice.id)
+                try:
+                    TTS.setProperty('volume', float(SayIt_Volume)/9)
+                except:
+                    cbpi.notify("SayIt Error", "Unable to set the volume.", type="Warning", timeout=None)
+                    cbpi.app.logger.error("SayIt Error - Unable to set the volume.")
+        TTS.setProperty('rate', 150)
         SayIt = "SayIt Initialized"
+        TTS.say(SayIt)
+        
         
 
 
@@ -60,17 +73,9 @@ def SayItVolume():
 
 @cbpi.event("MESSAGE", async=True)
 def messageEvent(message):
+    if SayIt == None: return
     SayIt_Message ='{0},{1},{2}'.format(message["type"], message["headline"], message["message"])
-    voices = TTS.getProperty('voices')
-    for voice in voices:
-        if SayIt_Voice == voice.name:
-            TTS.setProperty('voice', voice.id)
-    try:
-        TTS.setProperty('volume', float(SayIt_Volume)/9)
-    except:
-            cbpi.notify("SayIt Error", "Unable to set the volume.", type="Warning", timeout=None)
-            cbpi.app.logger.error("SayIt Error - Unable to set the volume.")
-    TTS.setProperty('rate', 150)
     TTS.say(SayIt_Message)
     TTS.runAndWait()
-    #cbpi.app.logger.error("FAILED")
+    #TTS.startLoop()
+    #TTS.endLoop()
