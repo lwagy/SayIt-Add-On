@@ -10,5 +10,8 @@ Just download via CraftBeerPi3 Add-on page.
 You need to run the following command on your Raspberry Pi to install the missing python libs
 
 pip install gTTS
+
 pip install gTTS-token
+
 pip install gTTS pygame
+
