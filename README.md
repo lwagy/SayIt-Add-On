@@ -13,5 +13,5 @@ pip install gTTS
 
 pip install gTTS-token
 
-pip install gTTS pygame
+pip install pygame
 
