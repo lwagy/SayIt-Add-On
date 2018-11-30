@@ -21,7 +21,7 @@ SayItLang = [["el", "Greek"], ["zh-cn", "Chinese (Mandarin/China)"], ["my", "Mya
 @cbpi.initalizer(order=9000)
 def init(cbpi):
     print("Initializing the SayIt plugin by Lawrence Wagy")
-    cbpi.app.logger.info("Initializing the SayIt plugin by Lawrence Wagy")
+    cbpi.app.logger.info("Initializing the SayIt plugin.")
     global SayIt
 
     SayItVoice()
