@@ -11,7 +11,7 @@ You need to run the following command on your Raspberry Pi to install the missin
 
 pip install gTTS
 
-pip install gTTS-token
+pip install gTTS-token (version 1.1.3 or higher)
 
 pip install pygame
 
